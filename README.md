@@ -16,3 +16,30 @@ Users can write articles and comment on them.
 
 There are Issues created for implementing this functionality.
 All the implementation details are described in each issue.
+
+## Contribution
+- Step 1
+Fork the project from this repository
+
+- Step 2
+Clone the project from your repository using 
+
+    `git clone https://github.com/**{your-username}**/article-hub.git`
+
+- Step 3
+Follow the instructions in the Issue.
+
+- Step 4
+Commit changes to your local repository.
+
+    `git add .`
+    
+    `git commit -m "issue-number:change"` 
+
+- Step 5
+Push the changes
+
+    `git push`
+    
+- Step 6
+Create a Pull Request using same Issue number and name 
