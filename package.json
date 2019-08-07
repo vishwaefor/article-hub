@@ -1,0 +1,24 @@
+{
+  "name": "article-hub",
+  "version": "1.0.0",
+  "description": "CMS Application for articles",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishwaefor/article-hub.git"
+  },
+  "keywords": [
+    "cms",
+    "nodejs",
+    "articles"
+  ],
+  "author": "Vishwa Jayarathna",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vishwaefor/article-hub/issues"
+  },
+  "homepage": "https://github.com/vishwaefor/article-hub#readme"
+}
