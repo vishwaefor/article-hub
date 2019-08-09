@@ -16,13 +16,13 @@ const articleSchema = new Schema(
       required: false
     },
     author: {
-      type: mongoose.Schema.types.ObectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User'
     },
     comments: [
       {
-        type: mongoose.Schema.types.ObectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: false,
         ref: 'Comment'
       }
@@ -31,4 +31,4 @@ const articleSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model('Article', articleSchema);
