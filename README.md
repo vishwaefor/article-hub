@@ -1,4 +1,6 @@
 # Article Hub
+#mongodb+srv://root:<password>@assignment01-53moj.mongodb.net/test?retryWrites=true&w=majority
+#root - abms
 
 Article Hub is a REST API written in Node.js. This is an CMS for maintaining articles. 
 Users can write articles and comment on them.
