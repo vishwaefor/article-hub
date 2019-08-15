@@ -9,20 +9,9 @@ connection .then((db) => { console.log("Connected correctly to server"); }) .cat
 
 
 
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://root:abms@assignment01-53moj.mongodb.net/test?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
-
-
-
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
 
 var app = express();
 
