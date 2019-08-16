@@ -4,8 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const connection = mongoose.connect( 'mongodb+srv://root:abms@assignment01-53moj.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
-connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+// const connection = mongoose.connect( 'mongodb+srv://root:abms@assignment01-53moj.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+// connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
 
 
 
