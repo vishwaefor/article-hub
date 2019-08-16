@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -39,3 +40,8 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//mongoose--
+
+const connection = mongoose.connect('mongodb+srv://Lakshan:<password>@cluster0-7il6d.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
