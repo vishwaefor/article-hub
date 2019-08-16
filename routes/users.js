@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const { check, validationResult } = require('express-validator');
 
 const Users = require('../models/users');
+
+const { check, validationResult } = require('express-validator');
 
 router.use(bodyParser.json());
 
