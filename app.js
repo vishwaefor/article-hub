@@ -7,6 +7,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const mongoose = require('mongoose');
+const connection = mongoose.connect('mongodb+srv://sanduni:s965010025V%40%23%23@article-2ngth.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+
 var app = express();
 
 // view engine setup
