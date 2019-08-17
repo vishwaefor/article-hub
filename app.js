@@ -4,9 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+// const connection = mongoose.connect( 'mongodb+srv://root:abms@assignment01-53moj.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+// connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+
+
+
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
+//var articlesRouter = require('./routes/articles');
 
 var app = express();
 
@@ -22,6 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+//app.use('/articles', articlesRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -36,12 +44,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ errors: [{ msg: err.message }] }); // change render to json method
 });
 
 module.exports = app;
-
-//mongoose--
-
-const connection = mongoose.connect('mongodb+srv://Lakshan:<password>@cluster0-7il6d.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
-connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
