@@ -78,7 +78,6 @@ router.get('/', (req, res, next) => {
           r => {
             if (r) {
               const errors = validationResult(req);
-  
               if (!errors.isEmpty()) {
                 res.status(422).json({ errors: errors.array() });
               } else {
@@ -108,12 +107,10 @@ router.get('/', (req, res, next) => {
             throw error;
           }
         )
-  
         .catch(err => next(err));
     }
-  );
-  
-  
+  );  
+
   router.post(
     '/',
     [
