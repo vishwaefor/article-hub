@@ -216,4 +216,7 @@ router.get('/:id/comments', (req, res, next) => {
         .catch(err => next(err));
 });
 
+//PUT /articles/:id for editing an article
+//DELETE /articles/:id for deleting an article
+
 module.exports = router;
