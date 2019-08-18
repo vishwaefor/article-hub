@@ -1,5 +1,5 @@
 # Article Hub
-
+mongodb+srv://rivimal:liyanage7989@assignment-vsbi5.mongodb.net/test?retryWrites=true&w=majority
 Article Hub is a REST API written in Node.js. This is an CMS for maintaining articles. 
 Users can write articles and comment on them.
 
