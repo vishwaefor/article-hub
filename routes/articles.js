@@ -62,7 +62,6 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-//routes for adding a comment to an article
 router.post(
   '/:id/comments',
   [
