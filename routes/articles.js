@@ -9,6 +9,7 @@ const { check, validationResult } = require('express-validator');
 
 router.use(bodyParser.json());
 
+
 router.post(
     '/',
     [
