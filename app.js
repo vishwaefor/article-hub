@@ -55,4 +55,7 @@ app.use(function (err, req, res, next) {
   res.json({ errors: [{ msg: err.message }] }); // change render to json method
 });
 
+var articlesRouter = require('./routes/articles');
+app.use('/articles', articlesRouter);
+
 module.exports = app;
