@@ -7,7 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
 var app = express();
+
+//MongoDB connection added.
+const mongoose = require('mongoose');
+const connection = mongoose.connect("mongodb+srv://ishara:Qq1234567@cluster0-09cqz.mongodb.net/test?retryWrites=true&w=majority", {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,5 +44,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
