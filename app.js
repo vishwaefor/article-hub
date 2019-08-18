@@ -46,4 +46,8 @@ app.use(function(err, req, res, next) {
 });
 
 
+// Articles routes
+var articlesRouter = require('./routes/articles');
+app.use('/articles', articlesRouter);
+
 module.exports = app;
