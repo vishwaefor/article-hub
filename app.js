@@ -39,3 +39,8 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+const mongoose = require('mongoose');
+const connection = mongoose.connect('mongodb+srv://assignment:assignment@assignment-wx6ue.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
