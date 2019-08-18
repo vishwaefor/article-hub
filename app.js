@@ -10,13 +10,14 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 
-// Added MongoDB Atlas connection
 const mongoose = require('mongoose');
-const connection = mongoose.connect('mongodb+srv://Kamith:kamith%23456%2A@assignment1-mjj7x.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+const connection = mongoose.connect('mongodb+srv://Kamith:Kamith%23456%2A@assignment1-mjj7x.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
 
+
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', 4path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
