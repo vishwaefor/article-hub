@@ -12,7 +12,7 @@ var app = express();
 
 // Added MongoDB Atlas connection
 const mongoose = require('mongoose');
-const connection = mongoose.connect('mongodb+srv://Kamith:<password>@assignment1-mjj7x.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+const connection = mongoose.connect('mongodb+srv://Kamith:kamith%23456%2A@assignment1-mjj7x.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
 
 // view engine setup
