@@ -105,7 +105,7 @@ router.get('/', (req, res, next) => {
   router.post(
     '/:id/comments',
     [
-      // title should be given
+      
       check('comment')
         .exists()
         .withMessage('comment is not provided')
