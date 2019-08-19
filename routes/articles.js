@@ -57,3 +57,44 @@ router.post(
   );
   
   module.exports = router;
+
+  router.get('/', (req, res, next) => {
+    Articles.find()
+      .populate('author')
+      .then(results => {
+        res.status(200).json({
+          results: results.map(r => {
+            return {
+              id: r.id,
+              title: r.title,
+              content: r.content,
+              image: r.image,
+              author:
+                (r.author && { id: r.author._id, name: r.author.name }) || null
+            };
+          })
+        });
+      })
+      .catch(err => next(err));
+  });
+
+  router.get('/', (req, res, next) => {
+    Articles.find()
+      .populate('author')
+      .then(results => {
+        res.status(200).json({
+          results: results.map(r => {
+            return {
+              id: r.id,
+              title: r.title,
+              content: r.content,
+              image: r.image,
+              author:
+                (r.author && { id: r.author._id, name: r.author.name }) || null
+            };
+          })
+        });
+      })
+      .catch(err => next(err));
+  });
+  
