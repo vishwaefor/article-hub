@@ -40,8 +40,22 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+//
+
 // Database Connection
 
 const mongoose = require('mongoose');
 const connection = mongoose.connect('mongodb+srv://rexzzz:aIZnkr1bdypNObjK@articledb-3ljjb.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+
+
+//user routes
+
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
+
+
+
+
+
+
