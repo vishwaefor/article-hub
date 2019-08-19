@@ -4,7 +4,7 @@ connection .then((db) => { console.log("Connected correctly to server"); }) .cat
 
 
 const usersRouter = require('./routes/users');
-app.use('/users', usersRouter);
+
 
 
 
@@ -15,7 +15,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
 
 var app = express();
 
