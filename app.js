@@ -49,6 +49,9 @@ app.use(function (err, req, res, next) {
   res.json({ errors: [{ msg: err.message }] }); // change render to json method
 });
 
+var articlesRouter = require('./routes/articles');
+app.use('/articles', articlesRouter);
+
 const mongoose = require('mongoose');
 const connection = mongoose.connect('mongodb+srv://kanishka95-cloud:<password>@cluster0-wakvz.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
