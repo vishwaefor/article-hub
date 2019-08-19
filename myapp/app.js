@@ -38,4 +38,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const mongoose = require('mongoose');
+const connection = mongoose.connect('replace the connection string taken above', {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) }); 
+
 module.exports = app;
