@@ -24,6 +24,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 
+
+
 const connection = mongoose.connect('mongodb+srv://midu:mk95mk95mk95mk95@cluster0-hpu5j.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
 
