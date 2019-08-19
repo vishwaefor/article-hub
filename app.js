@@ -8,6 +8,9 @@ var indexRouter = require('./routes/index');
 //Add user routes
 var usersRouter = require('./routes/users');
 
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) }); 
+
+
 var app = express();
 
 //Database added
@@ -25,9 +28,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
 //Add user routes
 app.use('/users', usersRouter);
+//Add articles routes
+var articlesRouter = require('./routes/articles');
+app.use('/articles', articlesRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,7 +56,6 @@ app.use(function(err, req, res, next) {
 
 const mongoose = require('mongoose');
 const connection = mongoose.connect('mongodb+srv://stem:Prasadi1234@articlehub-g2doe.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
-connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) }); 
 
 
 
