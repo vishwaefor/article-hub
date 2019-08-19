@@ -34,9 +34,14 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  // JSON error
+  res.status(err.status || 500);
+  res.json({ errors: [{ msg: err.message }] }); // change render to json method
+
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+
 });
 
 const mongoose = require('mongoose');
