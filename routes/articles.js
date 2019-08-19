@@ -11,30 +11,6 @@ const Users = require('../models/users');
 
 router.use(bodyParser.json());
 
-router.post('/', function(req, res, next) {
-  let article = req.body;
-
-  new Promise((resolve, reject) => {
-
-    article.title = null;
-    article.comments = [];
-   
-  })
-    .then(article => {
-      return Article.create(article);
-    })
-    .then(article => {
-      console.log('article created', article.title);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.json({ id: article._id, title: article.title, image: article.image, content:article.content, author:article.author,
-      comments:article.comments });
-    })
-    .catch(err => {
-      next(err);
-    });
-});
-
 router.post(
   '/',
   [
