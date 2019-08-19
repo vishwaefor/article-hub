@@ -7,6 +7,13 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 //add user routes
 var usersRouter = require('./routes/users');
+//add artical routes
+var articlesRouter = require('./routes/articles');
+
+const mongoose = require('mongoose');
+const connection = mongoose.connect('mongodb+srv://root:1234@articalhub-5uywr.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+
 
 var app = express();
 
@@ -22,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/articles', articlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,9 +51,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 
 });
-
-const mongoose = require('mongoose');
-const connection = mongoose.connect('mongodb+srv://root:1234@articalhub-5uywr.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
-connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
 
 module.exports = app;
