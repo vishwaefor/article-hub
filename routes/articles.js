@@ -103,4 +103,56 @@ router.get('/', (req, res, next) => {
       .catch(err => next(err));
   });
 
+  router.post(
+    '/:id/comments',
+    [
+      // title should be given
+      check('comment')
+        .exists()
+        .withMessage('comment is not provided')
+        .isLength({ min: 10 })
+        .withMessage('minimum 10 charactors required for comment')
+    ],
+    (req, res, next) => {
+      Articles.findById(req.params.id)
+        .populate('author', 'comments.author')
+        .then(
+          r => {
+            if (r) {
+              const errors = validationResult(req);
+  
+              if (!errors.isEmpty()) {
+                res.status(422).json({ errors: errors.array() });
+              } else {
+                const comment = req.body;
+                Users.findOne() // We are tempory adding a user as the author
+                  .then(author => {
+                    comment.author = author._id;
+                    Comments.create(comment)
+                      .then(comment => {
+                        r.comments.push(comment);
+                        return r.save();
+                      })
+                      .then(r => {
+                        res.status(201).json({ message: 'comment added' });
+                      });
+                  });
+              }
+            } else {
+              const error = new Error('no article found');
+              error.status = 404;
+              throw error;
+            }
+          },
+          err => {
+            const error = new Error('invalid article id');
+            error.status = 400;
+            throw error;
+          }
+        )
+  
+        .catch(err => next(err));
+    }
+  );
+
 module.exports = router;
