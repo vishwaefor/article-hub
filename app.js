@@ -8,6 +8,11 @@ const mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//add artical routes
+var articlesRouter = require('./routes/articles');
+app.use('/articles', articlesRouter);
+
+
 var app = express();
 
 // view engine setup
