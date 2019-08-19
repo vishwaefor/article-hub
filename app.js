@@ -1,3 +1,8 @@
+const mongoose = require('mongoose');
+const connection = mongoose.connect('mongodb+srv://chamara96:r82SgWvSL3TMFfb@cluster0-cs2ab.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
