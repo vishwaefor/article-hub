@@ -3,6 +3,9 @@ const connection = mongoose.connect('mongodb+srv://asitha96:qwerlkjh@cluster0-tj
 connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
 
 
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
+
 
 
 var createError = require('http-errors');
