@@ -58,7 +58,7 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post(
+router.put(
   '/:id/comments',
   [
     // title should be given
@@ -109,5 +109,13 @@ router.post(
       .catch(err => next(err));
   }
 );
+
+router.delete('/:id', function (req, res, next) {
+    let id = parseInt(req.params.id);
+
+    delete articles[id];
+
+    delayedSend(res, '');
+});
 
 module.exports = router;
