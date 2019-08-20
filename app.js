@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
 
 const mongoose = require('mongoose');
 const connection = mongoose.connect('mongodb+srv://ashikahansini:ashika123@cluster0-udxyi.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
