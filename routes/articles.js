@@ -200,7 +200,7 @@ router.get('/', (req, res, next) => {
   });
 
 
-  ///PUT /articles/:id for editing an article
+  //PUT /articles/:id for editing an article
 router.put('/:id', (req, res, next) => {
   Articles.findByIdAndUpdate(req.params.id, {
           $set: req.body
