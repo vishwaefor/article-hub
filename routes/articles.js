@@ -156,4 +156,116 @@ router.post(
     }
   );
 
+  router.get('/:id/comments', (req, res, next) => {
+    Articles.findById(req.params.id)
+      .then(
+        r => {
+          if (r) {
+            return Comments.find({
+              _id: {
+                $in: r.comments
+              }
+            }).populate('author');
+          } else {
+            const error = new Error('no article found');
+            error.status = 404;
+            throw error;
+          }
+        },
+        err => {
+          const error = new Error('invalid article id');
+          error.status = 400;
+          throw error;
+        }
+      )
+  
+      .then(comments => {
+        res.status(200).json({
+          results: comments.map(c => {
+            return {
+              id: c._id,
+              comment: c.comment,
+              author: { name: c.author.name, id: c.author._id },
+              createdAt: c.createdAt
+            };
+          })
+        });
+      })
+      .catch(err => next(err));
+  });
+// ////////////////////////
+// Handle delete contact
+router.delete(
+    '/:id', (req, res, next) => {
+      const errors = validationResult(req);
+  
+      if (!errors.isEmpty()) {
+        res.status(422).json({ errors: errors.array() });
+      } else {
+        // const article = req.body;
+        Users.findOne() // We are tempory adding a user as the author
+          .then(author => {
+            // article.author = author._id;
+            // article.comments = [];
+            return Articles.findByIdAndDelete(req.params.id);
+          })
+          .then(article => {
+            res
+              .status(201)
+              .json({
+                message: 'article deleted',
+                id: req.params.id
+              });
+          })
+          .catch(err => next(err));
+      }
+    }
+  );
+// 
+router.put(
+    '/',
+    [
+      // title should be given
+      check('title')
+        .exists()
+        .withMessage('title is not provided')
+        .isLength({ min: 5 })
+        .withMessage('minimum 5 charactors required for title'),
+      // content should be given
+      check('content')
+        .exists()
+        .withMessage('content is not provided')
+        .isLength({ min: 20 })
+        .withMessage('minimum 20 charactors required for content'),
+      // image should be given
+      check('image').exists()
+    ],
+    (req, res, next) => {
+      const errors = validationResult(req);
+  
+      if (!errors.isEmpty()) {
+        res.status(422).json({ errors: errors.array() });
+      } else {
+        const article = req.body;
+        Users.findOne() // We are tempory adding a user as the author
+          .then(author => {
+            article.author = author._id;
+            article.comments = [];
+            return Articles.findOneAndUpdate(article);
+          })
+          .then(article => {
+            res
+              .status(201)
+              .json({
+                message: 'article updated',
+                id: article._id,
+                title: article.title
+              });
+          })
+          .catch(err => next(err));
+      }
+    }
+  );
+
+
   module.exports = router;
