@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const mongoose = require('mongoose');
+const connection = mongoose.connect('mongodb+srv://thisislsj:Lahiru1234@cluster0-o2kqn.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
