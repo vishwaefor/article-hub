@@ -20,7 +20,8 @@ router.post('/', function(req, res, next) {
       }
     });
   })
-    .then(user => {
+    .then(user => 
+      {
       return Users.create(user);
     })
     .then(user => {
