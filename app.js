@@ -10,6 +10,7 @@ connection .then((db) => { console.log("Connected correctly to server"); }) .cat
 
 var indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+var articlesRouter = require('./routes/articles');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/articles', articlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
