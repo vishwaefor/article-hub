@@ -41,4 +41,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
+
 module.exports = app;
