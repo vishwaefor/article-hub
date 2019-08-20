@@ -7,10 +7,13 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
 var app = express();
 const mongoose = require('mongoose');
 const connection = mongoose.connect('mongodb+srv://root:1234@cluster0-kytg6.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
