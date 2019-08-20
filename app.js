@@ -10,6 +10,8 @@ connection .then((db) => { console.log("Connected correctly to server"); }) .cat
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
 
 var app = express();
 
