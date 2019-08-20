@@ -4,11 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-
-const usersRouter = require('./routes/users');
-app.use('/users', usersRouter);
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -24,9 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-var articlesRouter = require('./routes/articles');
-app.use('/articles', articlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,21 +39,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-//connect mongo db
-const mongoose = require('mongoose');
-const connection = mongoose.connect('mongodb+srv://assignment:assignment@assignment-wx6ue.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
-connection .then((db) => { console.log("Connected correctly to server"); }) .catch((err) => { console.log(err) });
-
-
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // JSON error
-  res.status(err.status || 500);
-  res.json({ errors: [{ msg: err.message }] }); // change render to json method
-});

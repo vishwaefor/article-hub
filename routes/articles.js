@@ -31,8 +31,6 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-
-
 router.get('/:id', (req, res, next) => {
   Articles.findById(req.params.id)
     .populate('author', 'comments.author')
@@ -62,6 +60,7 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+//routes for adding a comment to an article
 router.post(
   '/:id/comments',
   [
