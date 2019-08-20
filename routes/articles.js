@@ -1,121 +1,64 @@
 var express = require('express');
-
 var router = express.Router();
-
 const bodyParser = require('body-parser');
-
 const bcrypt = require('bcrypt');
-
 const { check, validationResult } = require('express-validator');
 
 
-
-
-
-
-
 const Articles  = require('../models/articles');
-
 const Users = require('../models/users');
-
-
 
 router.use(bodyParser.json());
 
-
-
 router.get('/', (req, res, next) => {
-
   Articles.find()
-
     .populate('author')
-
     .then(results => {
-
       res.status(200).json({
-
         results: results.map(r => {
-
           return {
-
             id: r.id,
-
             title: r.title,
-
             content: r.content,
-
             image: r.image,
-
             author:
-
               (r.author && { id: r.author._id, name: r.author.name }) || null
-
           };
-
         })
-
       });
-
     })
 
     .catch(err => next(err));
-
 });
 
-
-
 router.get('/:id', (req, res, next) => {
-
   Articles.findById(req.params.id)
-
     .populate('author', 'comments.author')
-
     .then(
-
       r => {
-
         if (r) {
-
           res.status(200).json({
-
             id: r.id,
-
             title: r.title,
-
             content: r.content,
-
             image: r.image,
-
             author:
-
               (r.author && { id: r.author._id, name: r.author.name }) || null
-
           });
-
         } else {
-
           const error = new Error('no article found');
-
           error.status = 404;
-
           throw error;
-
         }
 
       },
 
       err => {
-
         const error = new Error('invalid article id');
-
         error.status = 400;
-
         throw error;
-
       }
-
     )
-
     .catch(err => next(err));
 
 });
@@ -123,35 +66,21 @@ router.get('/:id', (req, res, next) => {
 
 
 //routes for adding a comment to an article
-
 router.post(
-
   '/:id/comments',
-
   [
-
     // title should be given
-
     check('comment')
-
       .exists()
-
       .withMessage('comment is not provided')
-
       .isLength({ min: 10 })
-
       .withMessage('minimum 10 charactors required for comment')
-
   ],
 
   (req, res, next) => {
-
     Articles.findById(req.params.id)
-
       .populate('author', 'comments.author')
-
       .then(
-
         r => {
 
           if (r) {
@@ -207,27 +136,19 @@ router.post(
         },
 
         err => {
-
-          const error = new Error('invalid article id');
-
-          error.status = 400;
+            const error = new Error('invalid article id');
+            error.status = 400;
 
           throw error;
 
         }
 
       )
-
-
-
-      .catch(err => next(err));
+     .catch(err => next(err));
 
   }
 
 );
-
-
-
 
 
 router.post(
@@ -317,8 +238,6 @@ router.post(
   }
 
 );
-
-
 
 module.exports = router;
 
