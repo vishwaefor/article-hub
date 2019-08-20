@@ -18,6 +18,8 @@ app.use('/users', usersRouter);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+var articlesRouter = require('./routes/articles');
+app.use('/articles', articlesRouter);
 
 app.use(logger('dev'));
 app.use(express.json());
