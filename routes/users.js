@@ -52,30 +52,30 @@ router.post('/', [
   .catch((err) => {
     next(err);
   });
-  
 
-  new Promise((resolve, reject) => {
-    bcrypt.hash(user.password, 10, (err, hash) => {
-      if (err) {
-        reject(err);
-      } else {
-        user.password = hash;
-        resolve(user);
-      }
-    });
-  })
-    .then(user => {
-      return Users.create(user);
-    })
-    .then(user => {
-      console.log('user created', user.name, user.email);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.json({ id: user._id, name: user.name, email: user.email });
-    })
-    .catch(err => {
-      next(err);
-    });
+
+  // new Promise((resolve, reject) => {
+  //   bcrypt.hash(user.password, 10, (err, hash) => {
+  //     if (err) {
+  //       reject(err);
+  //     } else {
+  //       user.password = hash;
+  //       resolve(user);
+  //     }
+  //   });
+  // })
+    // .then(user => {
+    //   return Users.create(user);
+    // })
+    // .then(user => {
+    //   console.log('user created', user.name, user.email);
+    //   res.statusCode = 200;
+    //   res.setHeader('Content-Type', 'application/json');
+    //   res.json({ id: user._id, name: user.name, email: user.email });
+    // })
+    // .catch(err => {
+    //   next(err);
+    // });
   }
 });
 
