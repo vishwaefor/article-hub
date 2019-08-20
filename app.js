@@ -6,10 +6,12 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 const usersRouter = require('./routes/users');
+var articlesRouter = require('./routes/articles');
 
 
 var app = express();
 app.use('/users', usersRouter);
+app.use('/articles', articlesRouter);
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
