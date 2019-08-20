@@ -200,7 +200,7 @@ router.get('/', (req, res, next) => {
   });
 
 
-  //PUT /articles/:id for editing an article
+  ///PUT /articles/:id for editing an article
 router.put('/:id', (req, res, next) => {
   Articles.findByIdAndUpdate(req.params.id, {
           $set: req.body
@@ -234,7 +234,7 @@ router.put('/:id', (req, res, next) => {
       .catch(err => next(err));
 });
 
-//DELETE /articles/:id for deleting an article
+///DELETE /articles/:id for deleting an article
 router.delete('/:id', (req, res, next) => {
   Articles.findByIdAndDelete(req.params.id)
       .then(
