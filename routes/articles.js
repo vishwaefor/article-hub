@@ -110,6 +110,103 @@ router.get('/', (req, res, next) => {
     }
   );
 
+  router.get('/:id/comments', (req, res, next) => {
+    Articles.findById(req.params.id)
+      .then(
+        r => {
+          if (r) {
+            return Comments.find({
+              _id: {
+                $in: r.comments
+              }
+            }).populate('author');
+          } else {
+            const error = new Error('no article found');
+            error.status = 404;
+            throw error;
+          }
+        },
+        err => {
+          const error = new Error('invalid article id');
+          error.status = 400;
+          throw error;
+        }
+      )
+  
+      .then(comments => {
+        res.status(200).json({
+          results: comments.map(c => {
+            return {
+              id: c._id,
+              comment: c.comment,
+              author: { name: c.author.name, id: c.author._id },
+              createdAt: c.createdAt
+            };
+          })
+        });
+      })
+      .catch(err => next(err));
+  });
+
+  //for editing an article
+router.put('/:id', (req, res, next) => {
+    Articles.findByIdAndUpdate(req.params.id, {
+            $set: req.body
+        })
+        .populate('author', 'comments.author')
+        .then(
+            r => {
+                if (r) {
+                    res.status(200).json({
+                        id: r.id,
+                        title: r.title,
+                        content: r.content,
+                        image: r.image,
+                        author: (r.author && {
+                            id: r.author._id,
+                            name: r.author.name
+                        }) || null
+                    });
+                } else {
+                    const error = new Error('no article found');
+                    error.status = 404;
+                    throw error;
+                }
+            },
+            err => {
+                const error = new Error('invalid article id');
+                error.status = 400;
+                throw error;
+            }
+        )
+        .catch(err => next(err));
+});
+
+//for deleting an article
+router.delete('/:id', (req, res, next) => {
+    Articles.findByIdAndDelete(req.params.id)
+        .then(
+            r => {
+                if (r) {
+                    res.status(200).json({
+                        id: r.id,
+                        status: "Article " + r.id + " has removed."
+                    });
+                } else {
+                    const error = new Error('no article found');
+                    error.status = 404;
+                    throw error;
+                }
+            },
+            err => {
+                const error = new Error('invalid article id');
+                error.status = 400;
+                throw error;
+            }
+        )
+        .catch(err => next(err));
+});
+
 router.post(
     '/',
     [
