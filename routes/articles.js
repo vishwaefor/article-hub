@@ -9,7 +9,29 @@ const Comments = require('../models/comments');
 const { check, validationResult } = require('express-validator');
 
 router.use(bodyParser.json());
-
+/**
+ * @swagger
+ *
+ * /articles:
+ *  post:
+ *    description: created an article
+ *    tags:
+ *       - name: "Articles"
+ *    consumes:
+ *       - "application/json"
+ *    produces:
+ *       - application/json
+ *    parameters:
+ *       - in: body
+ *         name: article
+ *         required: true
+ *         description: The article to be created
+ *         schema:
+ *            $ref: '#/definitions/Article'
+ *    responses:
+ *      201:
+ *        description: article created
+ */
 router.post(
   '/',
   [
@@ -53,6 +75,20 @@ router.post(
   }
 );
 
+/**
+ * @swagger
+ *
+ * /articles:
+ *  get:
+ *    description: get all articles
+ *    tags:
+ *       - name: "Articles"
+ *    produces:
+ *       - application/json
+ *    responses:
+ *      200:
+ *        description: all the articles
+ */
 router.get('/', (req, res, next) => {
   Articles.find()
     .populate('author')
@@ -73,6 +109,26 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
+/**
+ * @swagger
+ *
+ * /articles/{id}:
+ *  get:
+ *    parameters:
+ *      - in: path
+ *        name: id 
+ *        required: true
+ *        schema:
+ *          type:string
+ *    description: get an article
+ *    tags:
+ *       - name: "Articles"
+ *    produces:
+ *       - application/json
+ *    responses:
+ *      200:
+ *        description: the articles
+ */
 router.get('/:id', (req, res, next) => {
   Articles.findById(req.params.id)
     .populate('author')
@@ -102,6 +158,34 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+/**
+ * @swagger
+ *
+ * /articles/{id}/comments:
+ *  post:
+ *    parameters:
+ *      - in: path
+ *        name: id 
+ *        required: true
+ *        schema:
+ *          type:string
+ *      - in: body
+ *        name: comment
+ *        required: true
+ *        description: The comment to be created
+ *        schema:
+ *           $ref: '#/definitions/Comment'
+ *    description: put a comment to an article
+ *    tags:
+ *       - name: "Articles"
+ *    consumes:
+ *       - "application/json"
+ *    produces:
+ *       - application/json
+ *    responses:
+ *      201:
+ *        description: comment added
+ */
 router.post(
   '/:id/comments',
   [
@@ -154,6 +238,28 @@ router.post(
   }
 );
 
+/**
+ * @swagger
+ *
+ * /articles/{id}/comments:
+ *  get:
+ *    parameters:
+ *      - in: path
+ *        name: id 
+ *        required: true
+ *        schema:
+ *          type:string
+ *    description: get all the comment of an article
+ *    tags:
+ *       - name: "Articles"
+ *    consumes:
+ *       - "application/json"
+ *    produces:
+ *       - application/json
+ *    responses:
+ *      201:
+ *        description: all the comments
+ */
 router.get('/:id/comments', (req, res, next) => {
   Articles.findById(req.params.id)
     .then(

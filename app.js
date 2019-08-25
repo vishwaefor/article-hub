@@ -4,8 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+const swaggerJSDoc = require('./swaggerJSDoc');
+const swaggerUi = require('swagger-ui-express');
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var articlesRouter = require('./routes/articles');
 
@@ -35,17 +36,37 @@ connection
     console.log(err);
   });
 
-app.use('/', indexRouter);
+app.use((req, res, next) => {
+
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Request-With, Content-Type, Accept, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
+  }
+
+  next();
+});
+
+app.get('/', (req, res) => {
+  res.writeHead(302, {
+    'Location': '/api-docs'
+
+  });
+  res.end();
+});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc));
+
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

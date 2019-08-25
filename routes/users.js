@@ -8,7 +8,29 @@ const Users = require('../models/users');
 const { check, validationResult } = require('express-validator');
 
 router.use(bodyParser.json());
-
+/**
+ * @swagger
+ *
+ * /users:
+ *  post:
+ *    description: register a new user
+ *    tags:
+ *       - name: "Users"
+ *    consumes:
+ *       - "application/json"
+ *    produces:
+ *       - application/json
+ *    parameters:
+ *       - in: body
+ *         name: user
+ *         required: true
+ *         description: The user to be registered
+ *         schema:
+ *            $ref: '#/definitions/User'
+ *    responses:
+ *      201:
+ *        description: user registered
+ */
 router.post(
   '/',
   [

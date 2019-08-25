@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+/**
+ * @swagger
+ *
+ * definitions:
+ *   Comment:
+ *     type: object
+ *     required:
+ *       - comment
+ *     properties:
+ *       comment:
+ *         type: string
+ */
 const commentSchema = new Schema(
   {
     comment: {

@@ -1,6 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+/**
+ * @swagger
+ *
+ * definitions:
+ *   Article:
+ *     type: object
+ *     required:
+ *       - title
+ *       - content
+ *     properties:
+ *       title:
+ *         type: string
+ *       content:
+ *         type: string
+ *       image:
+ *         type: string
+ *         format: url
+ */
 const articleSchema = new Schema(
   {
     title: {
@@ -13,7 +30,7 @@ const articleSchema = new Schema(
     },
     content: {
       type: String,
-      required: false
+      required: true
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
