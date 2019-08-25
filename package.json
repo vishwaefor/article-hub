@@ -1,24 +1,23 @@
 {
   "name": "article-hub",
-  "version": "1.0.0",
-  "description": "CMS Application for articles",
-  "main": "app.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./bin/www",
+    "debug": "node --nolazy --inspect-brk=9229 ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vishwaefor/article-hub.git"
-  },
-  "keywords": [
-    "cms",
-    "nodejs",
-    "articles"
-  ],
-  "author": "Vishwa Jayarathna",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/vishwaefor/article-hub/issues"
-  },
-  "homepage": "https://github.com/vishwaefor/article-hub#readme"
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-validator": "^6.1.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "mongoose": "^5.6.8",
+    "morgan": "~1.9.1",
+    "nodemon": "^1.19.1",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.0.7"
+  }
 }
