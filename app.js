@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //mongo db
 const connection = mongoose.connect(
-  `mongodb+srv://node-admin:node-admin-pass@vzz-dev-cluster-bvpom.mongodb.net/test?retryWrites=true&w=majority`,
+  `mongodb+srv://node-admin:node-admin-pass@vzz-dev-cluster-bvpom.mongodb.net/article-hub?retryWrites=true&w=majority`,
   { useNewUrlParser: true }
 );
 connection
